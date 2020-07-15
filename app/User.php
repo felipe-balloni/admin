@@ -2,13 +2,13 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -38,17 +38,22 @@ class User extends Authenticatable
     ];
 
     public function adminlte_image()
-        {
-            return 'https://picsum.photos/300/300';
-        }
+    {
+        return 'https://picsum.photos/300/300';
+    }
 
-        public function adminlte_desc()
-        {
-            return 'That\'s a nice guy';
-        }
+    public function adminlte_desc()
+    {
+        return 'That\'s a nice guy';
+    }
 
-        public function adminlte_profile_url()
-        {
-            return 'profile/username';
-        }
+    public function adminlte_profile_url()
+    {
+        return 'profile/username';
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 }

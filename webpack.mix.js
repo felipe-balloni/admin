@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+require('laravel-mix-purgecss');
 
 /*
  |--------------------------------------------------------------------------
@@ -12,13 +13,18 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-   .sass('resources/sass/app.scss', 'public/css');
+    // .extract(['jquery', 'bootstrap', 'lodash', 'popper.js'])
+    .sass('resources/sass/app.scss', 'public/css')
+    // .purgeCss({
+    //     enabled: true,
+    // })
+;
 
 if (mix.inProduction()) {
     mix.version();
 }
 
-let proxy_url =  process.env.APP_URL;
+let proxy_url = process.env.APP_URL;
 
 mix.browserSync({
     proxy: proxy_url
